@@ -34,6 +34,6 @@ class PriceHistory(Base):
     id = Column(Integer, primary_key=True, index=True)
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
     price = Column(Float, nullable=False)
-    created_at = Column(DateTime, default=datetime.now(timezone.utc))
+    checked_at = Column(DateTime, default=datetime.now(timezone.utc))
 
     product = relationship("Product", back_populates="price_history")
