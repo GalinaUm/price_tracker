@@ -14,6 +14,16 @@ def create_alert(alert: schemas.PriceAlertCreate, db: Session = Depends(get_db))
     if not product:
         raise HTTPException(status_code=404, detail="Product not found")
 
+    existing = db.query(models.PriceAlert).filter(
+        models.PriceAlert.product_id == alert.product_id,
+        models.PriceAlert.email == alert.email,
+    ).first()
+
+    if existing:
+        raise HTTPException(
+            status_code=400, detail="Alert already exists for this product and email"
+        )
+
     db_alert = models.PriceAlert(
         product_id=product.id,
         email=alert.email,

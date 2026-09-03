@@ -1,15 +1,16 @@
 from fastapi import FastAPI
 
 from database import Base, engine
-from routers import alerts, products
+from routers import alerts, history, products
 from worker import check_price
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Price Tracker")
 
-app.include_router(products.router)
 app.include_router(alerts.router)
+app.include_router(history.router)
+app.include_router(products.router)
 
 
 @app.get("/")
