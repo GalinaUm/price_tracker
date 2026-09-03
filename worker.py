@@ -6,6 +6,7 @@ from celery.schedules import crontab
 from core.config import settings
 from database import SessionLocal
 from models import PriceHistory, Product
+from price_service import fetch_price
 
 
 app = Celery(
@@ -34,7 +35,10 @@ def check_price(product_id: int):
         if not product:
             return {"error": "Product not found."}
 
-        price = 99.99
+        try:
+            price = fetch_price(product.url)
+        except Exception as e:
+            return {"error": f"Could not fetch price for product {product_id}: {e}"}
 
         history = PriceHistory(
             product_id=product_id,
