@@ -11,5 +11,6 @@ app.conf.timezone = "UTC"
 
 
 @app.task
-def check_price():
-    return "price checked"
+def check_price(product_id: int):
+    print(f"Checking price for product {product_id}...")
+    return {"product_id": product_id, "price": 99.99}
