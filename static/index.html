@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Price Tracker</h1>
+    <section class="card">
+        <h2>Добавить товар</h2>
+        <form id="product-form">
+            <label for="product-name">Название</label>
+            <input type="text" id="product-name" placeholder="Название (напр. Bitcoin)" required>
+            <label for="product-symbol">Символ</label>
+            <input type="text" id="product-symbol" placeholder="Символ (напр. bitcoin)" required>
+            <button type="submit">Добавить</button>
+        </form>
+    </section>
+    <section class="card">
+        <h2>Создать подписку</h2>
+        <form id="alert-form">
+            <label for="alert-product">Товар</label>
+            <select id="alert-product" required>
+                <option value="">Выберите товар</option>
+            </select>
+            <label for="alert-email">Email</label>
+            <input type="email" id="alert-email" placeholder="Email" required>
+            <label for="alert-target">Целевая цена</label>
+            <input type="number" id="alert-target" placeholder="Целевая цена" step="0.01" required>
+            <button type="submit">Подписаться</button>
+        </form>
+    </section>
+    <section class="card">
+        <h2>Товары</h2>
+        <div id="product-list">Загрузка...</div>
+    </section>
+
+    <section class="card">
+        <h2>История цен</h2>
+        <label for="history-product">Товар для графика</label>
+        <select id="history-product">
+            <option value="">Выберите товар</option>
+        </select>
+        <canvas id="price-chart" width="800" height="300"></canvas>
+    </section>
+</div>
+<script src="app.js"></script>
+
+</body>
+</html>
